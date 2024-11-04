@@ -10,11 +10,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 100vh; /* Chiều cao bằng chiều cao màn hình */
             margin: 0;
             background-color: pink;
             font-family: Arial, sans-serif;
             overflow: hidden; /* Giữ nguyên để không có thanh cuộn */
+            width: 100vw; /* Đảm bảo chiều rộng là 100% của cửa sổ */
+            position: relative; /* Để dễ dàng căn chỉnh các phần tử */
         }
 
         /* Tạo hiệu ứng bong bóng lơ lửng */
@@ -86,16 +88,6 @@
             top: 0;
         }
 
-        /* Hiệu ứng to dần lên */
-        .heart.grow {
-            animation: grow 1.5s forwards;
-        }
-
-        @keyframes grow {
-            0% { transform: rotate(-45deg) scale(1); }
-            100% { transform: rotate(-45deg) scale(10); }
-        }
-
         /* Dòng chữ hiện ra */
         .message {
             display: none;
@@ -104,7 +96,7 @@
             color: #333;
             text-align: center;
             position: absolute;
-            top: 40%; /* Đặt vị trí cách giữa */
+            top: 30%; /* Đặt vị trí cách giữa */
             z-index: 1; /* Đảm bảo chữ ở trên trái tim */
         }
 
@@ -113,6 +105,9 @@
             display: none;
             margin-top: 20px;
             text-align: center;
+            position: absolute;
+            top: 60%; /* Đặt vị trí câu hỏi dưới tiêu đề */
+            width: 100%; /* Đảm bảo câu hỏi chiếm chiều rộng đầy đủ */
         }
 
         .question label, .question input {
@@ -173,6 +168,9 @@
             
             // Hiển thị dòng chữ sau khi nhấp
             message.style.display = 'block';
+            
+            // Cập nhật văn bản tiêu đề
+            message.textContent = "Anh hơi ngại nhắn hỏi lại nên là...";
             
             // Hiển thị câu hỏi sau 5 giây
             setTimeout(function() {
