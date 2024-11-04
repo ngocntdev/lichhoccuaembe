@@ -40,7 +40,7 @@
             height: 20px;
             background-color: rgba(255, 255, 255, 0.8);
             border-radius: 50%;
-            animation: floatUp 10s infinite linear;
+            animation: floatUp 6s infinite; /* Thay đổi thời gian để bong bóng nổi lên nhanh hơn */
             opacity: 0.6;
         }
 
@@ -105,16 +105,17 @@
         /* Bảng câu hỏi */
         .question {
             display: none;
-            margin-top: 20px;
             text-align: center;
             position: absolute;
             top: 60%; /* Đặt vị trí câu hỏi dưới tiêu đề */
             width: 100%; /* Đảm bảo câu hỏi chiếm chiều rộng đầy đủ */
+            transform: translateY(-50%); /* Giúp căn giữa hơn */
         }
 
         .question label {
             margin-bottom: 10px;
             font-size: 24px; /* Tăng kích thước chữ cho rõ ràng */
+            display: block; /* Đặt label thành khối để dễ dàng căn chỉnh */
         }
 
         .question input {
