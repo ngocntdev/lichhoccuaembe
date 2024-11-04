@@ -55,34 +55,23 @@
             }
         }
 
-        /* Tạo hình trái tim rực cháy */
+        /* Tạo hình trái tim */
         .heart {
             width: 600px; /* Tăng kích thước trái tim lên gấp 6 lần */
             height: 600px;
-            background: linear-gradient(to right, #ff4500, #ffcc00); /* Màu sắc chuyển đổi từ đỏ sang vàng */
+            background-color: red;
             position: relative;
             transform: rotate(-45deg);
             cursor: pointer;
             transition: all 0.5s;
             z-index: 1; /* Đảm bảo trái tim nằm trên bong bóng */
-            animation: pulse 1s infinite; /* Thêm hiệu ứng nhấp nháy */
-        }
-
-        /* Hiệu ứng nhấp nháy của trái tim */
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
         }
 
         .heart::before, .heart::after {
             content: "";
             width: 600px; /* Tăng kích thước trái tim lên gấp 6 lần */
             height: 600px;
-            background: linear-gradient(to right, #ff4500, #ffcc00); /* Màu sắc chuyển đổi từ đỏ sang vàng */
+            background-color: red;
             border-radius: 50%;
             position: absolute;
         }
