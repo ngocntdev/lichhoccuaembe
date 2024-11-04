@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang web trái tim</title>
+    <!-- Thêm liên kết Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Frankfurter&display=swap" rel="stylesheet">
     <style>
         /* Căn giữa trái tim trên trang */
         body, html {
@@ -13,7 +15,7 @@
             height: 100vh; /* Chiều cao bằng chiều cao màn hình */
             margin: 0;
             background-color: pink;
-            font-family: Arial, sans-serif;
+            font-family: 'Frankfurter', sans-serif; /* Sử dụng font Frankfurter */
             overflow: hidden; /* Giữ nguyên để không có thanh cuộn */
             width: 100vw; /* Đảm bảo chiều rộng là 100% của cửa sổ */
             position: relative; /* Để dễ dàng căn chỉnh các phần tử */
@@ -110,25 +112,37 @@
             width: 100%; /* Đảm bảo câu hỏi chiếm chiều rộng đầy đủ */
         }
 
-        .question label, .question input {
-            display: block;
+        .question label {
             margin-bottom: 10px;
+            font-size: 24px; /* Tăng kích thước chữ cho rõ ràng */
         }
 
         .question input {
-            padding: 8px;
-            font-size: 16px;
+            padding: 12px;
+            font-size: 18px;
             width: 80%;
-            margin: 0 auto;
+            margin: 10px auto;
+            border-radius: 20px; /* Bo tròn góc của ô nhập */
+            border: 2px solid #ff69b4; /* Viền màu hồng */
+            outline: none; /* Bỏ viền ngoài */
+            transition: border 0.3s; /* Hiệu ứng chuyển tiếp cho viền */
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.5); /* Hiệu ứng đổ bóng */
+        }
+
+        .question input:focus {
+            border-color: #ff1493; /* Màu viền khi ô nhập được chọn */
+            box-shadow: 0 0 15px rgba(255, 20, 147, 0.5); /* Hiệu ứng đổ bóng khi ô nhập được chọn */
         }
 
         .question button {
-            padding: 8px 16px;
-            font-size: 16px;
+            padding: 10px 20px;
+            font-size: 18px;
             background-color: #4CAF50;
             color: white;
             border: none;
+            border-radius: 20px; /* Bo tròn góc của nút */
             cursor: pointer;
+            transition: background-color 0.3s; /* Hiệu ứng chuyển tiếp cho màu nền */
         }
 
         .question button:hover {
@@ -163,19 +177,21 @@
             var heart = document.querySelector('.heart');
             var message = document.getElementById('message');
             
-            // Ẩn trái tim
-            heart.style.display = 'none';
-            
             // Hiển thị dòng chữ sau khi nhấp
             message.style.display = 'block';
             
             // Cập nhật văn bản tiêu đề
-            message.textContent = "Anh hơi ngại nhắn hỏi lại nên là...";
+            message.textContent = "Chào em bé Tấn Đù!";
             
-            // Hiển thị câu hỏi sau 5 giây
+            // Ẩn trái tim
+            heart.style.display = 'none';
+            
+            // Hiển thị câu hỏi sau 3 giây
             setTimeout(function() {
+                // Cập nhật văn bản tiêu đề cho câu hỏi
+                message.textContent = "Anh hơi ngại nhắn hỏi lại nên là...";
                 document.getElementById('question').style.display = 'block';
-            }, 5000);
+            }, 3000);
         }
 
         // Tạo bong bóng lơ lửng trên trang
