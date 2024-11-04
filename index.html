@@ -55,18 +55,10 @@
             }
         }
 
-        /* Các bong bóng có kích thước và vị trí ngẫu nhiên */
-        .bubble:nth-child(odd) { animation-duration: 8s; width: 25px; height: 25px; left: 10%; }
-        .bubble:nth-child(even) { animation-duration: 12s; width: 15px; height: 15px; left: 80%; }
-        .bubble:nth-child(3) { animation-duration: 6s; left: 30%; }
-        .bubble:nth-child(4) { animation-duration: 10s; width: 30px; height: 30px; left: 50%; }
-        .bubble:nth-child(5) { animation-duration: 7s; width: 10px; height: 10px; left: 70%; }
-        .bubble:nth-child(6) { animation-duration: 14s; width: 20px; height: 20px; left: 90%; }
-
         /* Tạo hình trái tim */
         .heart {
-            width: 100px;
-            height: 100px;
+            width: 600px; /* Tăng kích thước trái tim lên gấp 6 lần */
+            height: 600px;
             background-color: red;
             position: relative;
             transform: rotate(-45deg);
@@ -77,20 +69,20 @@
 
         .heart::before, .heart::after {
             content: "";
-            width: 100px;
-            height: 100px;
+            width: 600px; /* Tăng kích thước trái tim lên gấp 6 lần */
+            height: 600px;
             background-color: red;
             border-radius: 50%;
             position: absolute;
         }
 
         .heart::before {
-            top: -50px;
+            top: -300px;
             left: 0;
         }
 
         .heart::after {
-            left: 50px;
+            left: 300px;
             top: 0;
         }
 
@@ -107,7 +99,7 @@
         /* Dòng chữ hiện ra */
         .message {
             display: none;
-            font-size: 24px;
+            font-size: 48px; /* Tăng kích thước chữ cho rõ ràng */
             font-weight: bold;
             color: #333;
             text-align: center;
@@ -176,13 +168,11 @@
             var heart = document.querySelector('.heart');
             var message = document.getElementById('message');
             
-            // Thêm hiệu ứng to dần cho trái tim
-            heart.classList.add('grow');
+            // Ẩn trái tim
+            heart.style.display = 'none';
             
-            // Hiển thị dòng chữ sau khi trái tim to dần lên
-            setTimeout(function() {
-                message.style.display = 'block';
-            }, 1500); // Sau 1.5 giây
+            // Hiển thị dòng chữ sau khi nhấp
+            message.style.display = 'block';
             
             // Hiển thị câu hỏi sau 5 giây
             setTimeout(function() {
@@ -193,10 +183,13 @@
         // Tạo bong bóng lơ lửng trên trang
         function createFloatingBubbles() {
             const floatingBubbles = document.getElementById('floatingBubbles');
-            for (let i = 0; i < 80; i++) { // Tăng số lượng bong bóng lên 30
+            for (let i = 0; i < 30; i++) { // Tăng số lượng bong bóng lên 30
                 const bubble = document.createElement('div');
                 bubble.classList.add('bubble');
-                bubble.style.left = Math.random() * 100 + 'vw'; // Vị trí ngang ngẫu nhiên
+                
+                // Đặt vị trí ngẫu nhiên và thời gian ngẫu nhiên
+                bubble.style.left = Math.random() * 100 + 'vw'; 
+                bubble.style.animationDuration = Math.random() * (12 - 6) + 6 + 's'; // Thời gian từ 6 đến 12 giây
                 floatingBubbles.appendChild(bubble);
             }
         }
