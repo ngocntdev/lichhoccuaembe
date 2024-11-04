@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang web trái tim</title>
+    <style>
+        /* Căn giữa trái tim trên trang */
+        body, html {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f3f4f6;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Tạo hình trái tim */
+        .heart {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: relative;
+            transform: rotate(-45deg);
+            cursor: pointer;
+            transition: all 0.5s;
+        }
+        
+        .heart::before, .heart::after {
+            content: "";
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .heart::before {
+            top: -50px;
+            left: 0;
+        }
+        
+        .heart::after {
+            left: 50px;
+            top: 0;
+        }
+        
+        /* Hiệu ứng cháy */
+        .heart.burn {
+            background-color: orange;
+            animation: burn 0.5s forwards;
+        }
+        
+        @keyframes burn {
+            0% { background-color: red; }
+            50% { background-color: orange; }
+            100% { background-color: yellow; }
+        }
+        
+        /* Dòng chữ hiện ra */
+        .message {
+            display: none;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+        }
+        
+        /* Bảng câu hỏi */
+        .question {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .question label, .question input {
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .question input {
+            padding: 8px;
+            font-size: 16px;
+            width: 100%;
+        }
+        
+        .question button {
+            padding: 8px 16px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .question button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Phần trái tim -->
+    <div class="heart" onclick="showMessage()"></div>
+    
+    <!-- Dòng chữ chào mừng -->
+    <div class="message" id="message">Chào em bé Tấn Đù!</div>
+    
+    <!-- Bảng câu hỏi -->
+    <div class="question" id="question">
+        <label for="morning">Lịch học buổi sáng bắt đầu và kết thúc thế nào?</label>
+        <input type="text" id="morning" placeholder="VD: 8:00 - 11:00">
+        
+        <label for="afternoon">Lịch học buổi chiều bắt đầu và kết thúc thế nào?</label>
+        <input type="text" id="afternoon" placeholder="VD: 13:30 - 17:00">
+        
+        <button onclick="submitAnswer()">Gửi câu trả lời</button>
+    </div>
+
+    <script>
+        // Hàm hiển thị thông điệp và hiệu ứng cháy khi click vào trái tim
+        function showMessage() {
+            var heart = document.querySelector('.heart');
+            var message = document.getElementById('message');
+            
+            // Thêm hiệu ứng cháy vào trái tim
+            heart.classList.add('burn');
+            
+            // Hiển thị dòng chữ sau khi hiệu ứng chạy xong
+            setTimeout(function() {
+                message.style.display = 'block';
+            }, 500); // Sau 0.5 giây
+            
+            // Hiển thị câu hỏi sau 5 giây
+            setTimeout(function() {
+                document.getElementById('question').style.display = 'block';
+            }, 5000);
+        }
+
+        // Hàm xử lý khi người dùng bấm "Gửi câu trả lời"
+        function submitAnswer() {
+            var morning = document.getElementById('morning').value;
+            var afternoon = document.getElementById('afternoon').value;
+            
+            // Kiểm tra đầu vào và hiển thị một thông báo xác nhận (đơn giản)
+            if (morning && afternoon) {
+                alert("Cảm ơn em bé Tấn Đù đã trả lời! Buổi sáng: " + morning + ", Buổi chiều: " + afternoon);
+            } else {
+                alert("Vui lòng điền đầy đủ thông tin!");
+            }
+        }
+    </script>
+
+</body>
+</html>
