@@ -12,7 +12,8 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f3f4f6;
+            background-color: pink;
+            overflow: hidden;
             font-family: Arial, sans-serif;
         }
         
@@ -45,17 +46,15 @@
             left: 50px;
             top: 0;
         }
-        
-        /* Hiệu ứng cháy */
-        .heart.burn {
-            background-color: orange;
-            animation: burn 0.5s forwards;
+
+        /* Hiệu ứng to dần lên */
+        .heart.grow {
+            animation: grow 1.5s forwards, shake 0.5s infinite;
         }
-        
-        @keyframes burn {
-            0% { background-color: red; }
-            50% { background-color: orange; }
-            100% { background-color: yellow; }
+
+        @keyframes grow {
+            0% { transform: rotate(-45deg) scale(1); }
+            100% { transform: rotate(-45deg) scale(10); }
         }
         
         /* Dòng chữ hiện ra */
@@ -67,6 +66,23 @@
             color: #333;
         }
         
+        /* Bong bóng lấp lánh */
+        .bubble {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.8);
+            animation: sparkle 1.5s ease-out forwards;
+            pointer-events: none;
+        }
+
+        /* Hiệu ứng bay lên và mờ dần cho bong bóng */
+        @keyframes sparkle {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-150px); }
+        }
+
         /* Bảng câu hỏi */
         .question {
             display: none;
@@ -101,7 +117,7 @@
 <body>
 
     <!-- Phần trái tim -->
-    <div class="heart" onclick="showMessage()"></div>
+    <div class="heart" onclick="animateHeart()"></div>
     
     <!-- Dòng chữ chào mừng -->
     <div class="message" id="message">Chào em bé Tấn Đù!</div>
@@ -118,23 +134,46 @@
     </div>
 
     <script>
-        // Hàm hiển thị thông điệp và hiệu ứng cháy khi click vào trái tim
-        function showMessage() {
+        function animateHeart() {
             var heart = document.querySelector('.heart');
             var message = document.getElementById('message');
             
-            // Thêm hiệu ứng cháy vào trái tim
-            heart.classList.add('burn');
+            // Thêm hiệu ứng to dần cho trái tim
+            heart.classList.add('grow');
             
-            // Hiển thị dòng chữ sau khi hiệu ứng chạy xong
+            // Hiển thị dòng chữ và bong bóng sau khi trái tim to dần lên
             setTimeout(function() {
                 message.style.display = 'block';
-            }, 500); // Sau 0.5 giây
+                createBubbles(); // Tạo bong bóng lấp lánh
+            }, 1500); // Sau 1.5 giây
             
             // Hiển thị câu hỏi sau 5 giây
             setTimeout(function() {
                 document.getElementById('question').style.display = 'block';
             }, 5000);
+        }
+
+        // Hàm tạo bong bóng lấp lánh
+        function createBubbles() {
+            for (let i = 0; i < 30; i++) { // Số lượng bong bóng
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                document.body.appendChild(bubble);
+
+                // Vị trí ngẫu nhiên cho mỗi bong bóng
+                bubble.style.left = Math.random() * 100 + 'vw';
+                bubble.style.top = Math.random() * 100 + 'vh';
+
+                // Kích thước ngẫu nhiên cho mỗi bong bóng
+                const size = Math.random() * 10 + 5;
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+
+                // Loại bỏ bong bóng sau khi hoàn thành animation
+                bubble.addEventListener('animationend', () => {
+                    bubble.remove();
+                });
+            }
         }
 
         // Hàm xử lý khi người dùng bấm "Gửi câu trả lời"
