@@ -17,6 +17,7 @@
             background-color: pink;
             font-family: 'Frankfurter', sans-serif; /* Sử dụng font Frankfurter */
             overflow: hidden; /* Giữ nguyên để không có thanh cuộn */
+            width: 100vw; /* Đảm bảo chiều rộng là 100% của cửa sổ */
             position: relative; /* Để dễ dàng căn chỉnh các phần tử */
         }
 
@@ -39,7 +40,7 @@
             height: 20px;
             background-color: rgba(255, 255, 255, 0.8);
             border-radius: 50%;
-            animation: floatUp linear infinite; /* Thay đổi thành animation linear */
+            animation: floatUp 6s infinite; /* Thay đổi thời gian để bong bóng nổi lên nhanh hơn */
             opacity: 0.6;
         }
 
@@ -48,6 +49,9 @@
             0% {
                 transform: translateY(0) scale(1);
                 opacity: 0.6;
+            }
+            50% {
+                opacity: 0.8;
             }
             100% {
                 transform: translateY(-110vh) scale(1.2);
@@ -200,7 +204,7 @@
                 
                 // Đặt vị trí ngẫu nhiên và thời gian ngẫu nhiên
                 bubble.style.left = Math.random() * 100 + 'vw'; 
-                bubble.style.animationDuration = (Math.random() * (12 - 6) + 6) + 's'; // Thời gian từ 6 đến 12 giây
+                bubble.style.animationDuration = Math.random() * (12 - 6) + 6 + 's'; // Thời gian từ 6 đến 12 giây
                 floatingBubbles.appendChild(bubble);
             }
         }
